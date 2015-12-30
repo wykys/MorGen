@@ -31,10 +31,10 @@
 
 int8_t CreateMorseWav(int8_t *file_name, int8_t *vstup, uint32_t len, double t_space, double t_chars, uint16_t ToneF)
 {
-	FILE *fw;
+    FILE *fw;
     wav_t wav;
 
-	// hlavička
+    // hlavička
     wav.RIFF.ChungID[0] = 'R';
     wav.RIFF.ChungID[1] = 'I';
     wav.RIFF.ChungID[2] = 'F';
@@ -67,27 +67,27 @@ int8_t CreateMorseWav(int8_t *file_name, int8_t *vstup, uint32_t len, double t_s
 
     len = CreateSamples(&wav, vstup, len, t_space, t_chars, ToneF, SAMPLE_RATE);
     if (!len)
-		return -1;
+        return -1;
 
     wav.data.SubChung2Size = len;
     wav.RIFF.ChungSize = 36 + len;
 
     if ((fw = fopen(file_name, "wb")) != NULL)
-	{
-		fwrite(&wav.RIFF, 12, 1, fw);
-		fwrite(&wav.fmt, 24, 1, fw);
-		fwrite(&wav.data, 8, 1, fw);
-		fwrite(wav.data.samples, len, 1, fw);
+    {
+        fwrite(&wav.RIFF, 12, 1, fw);
+        fwrite(&wav.fmt, 24, 1, fw);
+        fwrite(&wav.data, 8, 1, fw);
+        fwrite(wav.data.samples, len, 1, fw);
 
-		fclose(fw);
-	}
-	else
-	{
-		free(wav.data.samples);
-		printf("\nSoubor se nepodarilo vytvorit.\n\n");
-		return -1;
-	}
+        fclose(fw);
+    }
+    else
+    {
+        free(wav.data.samples);
+        printf("\nSoubor se nepodarilo vytvorit.\n\n");
+        return -1;
+    }
 
-	free(wav.data.samples);
-	return 0;
+    free(wav.data.samples);
+    return 0;
 }

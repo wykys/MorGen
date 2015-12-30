@@ -10,7 +10,7 @@
  * 888       888  "Y88P"  888      "Y8888P88  "Y8888  888  888
  *
  *
- * knihovna pro pr·ci s morse kÛdem
+ * knihovna pro pr√°ci s morse k√≥dem
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,19 +28,19 @@
 #ifndef MORSE_H_INCLUDED
 #define MORSE_H_INCLUDED
 
-#define MORSE_CHAR_NUM	51
+#define MORSE_CHAR_NUM  51
 
 #include "stype.h"
 #include "wav.h"
 
 typedef struct
 {
-	int8_t symbol;
-	int8_t code[7];
-	uint8_t dot;
-	uint8_t dash;
-	double time;
-	uint32_t samples;
+    int8_t symbol;
+    int8_t code[7];
+    uint8_t dot;
+    uint8_t dash;
+    double time;
+    uint32_t samples;
 } mor_char_t;
 
 mor_char_t MorseTable[MORSE_CHAR_NUM];

@@ -38,20 +38,13 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="morse.h" />
-		<Unit filename="stype.c">
-			<Option compilerVar="CC" />
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
 		<Unit filename="stype.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="wav.c">
 			<Option compilerVar="CC" />
-			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="wav.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="wav.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
