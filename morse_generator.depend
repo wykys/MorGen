@@ -6,7 +6,7 @@
 	"wav.h"
 	"morse.h"
 
-1451439699 c:\projects\morse_generator\wav.h
+1451441335 c:\projects\morse_generator\wav.h
 	"stype.h"
 
 1451309820 c:\projects\morse_generator\stype.h
@@ -15,7 +15,7 @@
 	"stype.h"
 	"wav.h"
 
-1451439647 source:c:\projects\morse_generator\morse.c
+1451440490 source:c:\projects\morse_generator\morse.c
 	<math.h>
 	<stdio.h>
 	"morse.h"

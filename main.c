@@ -44,6 +44,12 @@ int main(void)
     double t_space, t_chars;
     uint16_t ToneF = 600; // kmytočet tónu
 
+    // výpočet časů slov a mezer
+    t_space = DotTime(wpm_space);
+    t_chars = DotTime(wpm_chars);
+    // spočítá délky morse kódů
+    MorseTableCodeTime(t_space, t_chars, SAMPLE_RATE);
+
     do
     {
         system("cls");
@@ -63,7 +69,8 @@ int main(void)
         printf("                    2. vystupni soubor: %s\n", file_name_out);
         printf("                    3. frekvence tonu: %hu Hz\n", ToneF);
         printf("                    4. WPM mezer: %hu\n", wpm_space);
-        printf("                    5. WPM symbolu: %hu\n\n", wpm_chars);
+        printf("                    5. WPM symbolu: %hu\n", wpm_chars);
+        printf("                    6. Zobras morseovu tabulku\n\n");
 
         printf("Pro vygenerovani wavu stisknete Enter\n");
         printf("pro napovedu H, pokud chcete zmenet nastaveni\n");
@@ -98,6 +105,11 @@ int main(void)
                 printf("WPM symbolu: >>> ");
                 scanf("%hu", &wpm_chars);
                 fflush(stdin);
+                break;
+            case '6':
+                printf("\n");
+                MorseTableShow();
+                system("pause");
                 break;
             default :
                 printf("\n\tVytvoril wykys 2015\n");
