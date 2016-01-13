@@ -28,13 +28,16 @@
 #include <stdio.h>
 #include "wav.h"
 #include "morse.h"
+#include "spelling_table.h"
+#include "spelling.h"
 
+// vytvoří wav soubor s morseovým kódem
 int8_t CreateMorseWav(int8_t *file_name, int8_t *vstup, uint32_t len, double t_space, double t_chars, uint16_t ToneF)
 {
-    FILE *fw;
+	FILE *fw;
     wav_t wav;
 
-    // hlavička
+	// hlavička
     wav.RIFF.ChungID[0] = 'R';
     wav.RIFF.ChungID[1] = 'I';
     wav.RIFF.ChungID[2] = 'F';
@@ -67,27 +70,91 @@ int8_t CreateMorseWav(int8_t *file_name, int8_t *vstup, uint32_t len, double t_s
 
     len = CreateSamples(&wav, vstup, len, t_space, t_chars, ToneF, SAMPLE_RATE);
     if (!len)
-        return -1;
+		return -1;
 
     wav.data.SubChung2Size = len;
     wav.RIFF.ChungSize = 36 + len;
 
     if ((fw = fopen(file_name, "wb")) != NULL)
-    {
-        fwrite(&wav.RIFF, 12, 1, fw);
-        fwrite(&wav.fmt, 24, 1, fw);
-        fwrite(&wav.data, 8, 1, fw);
-        fwrite(wav.data.samples, len, 1, fw);
+	{
+		fwrite(&wav.RIFF, 12, 1, fw);
+		fwrite(&wav.fmt, 24, 1, fw);
+		fwrite(&wav.data, 8, 1, fw);
+		fwrite(wav.data.samples, len, 1, fw);
 
-        fclose(fw);
-    }
-    else
-    {
-        free(wav.data.samples);
-        printf("\nSoubor se nepodarilo vytvorit.\n\n");
-        return -1;
-    }
+		fclose(fw);
+	}
+	else
+	{
+		free(wav.data.samples);
+		printf("\nSoubor se nepodarilo vytvorit.\n\n");
+		return -1;
+	}
 
-    free(wav.data.samples);
-    return 0;
+	free(wav.data.samples);
+	return 0;
+}
+
+// vytvoří wav soubor s hláskováním
+int8_t CreateSpellingWav(int8_t *file_name, int8_t *vstup, uint32_t len, double t_space)
+{
+	FILE *fw;
+    wav_t wav;
+
+	// hlavička
+    wav.RIFF.ChungID[0] = 'R';
+    wav.RIFF.ChungID[1] = 'I';
+    wav.RIFF.ChungID[2] = 'F';
+    wav.RIFF.ChungID[3] = 'F';
+
+    wav.RIFF.Format[0] = 'W';
+    wav.RIFF.Format[1] = 'A';
+    wav.RIFF.Format[2] = 'V';
+    wav.RIFF.Format[3] = 'E';
+
+    // fmt
+    wav.fmt.SubChung1ID[0] = 'f';
+    wav.fmt.SubChung1ID[1] = 'm';
+    wav.fmt.SubChung1ID[2] = 't';
+    wav.fmt.SubChung1ID[3] = ' ';
+    wav.fmt.SubChung1Size = 16;
+    wav.fmt.AudioFormat = 1; // pro PCM
+    wav.fmt.NumChannels = 1; // mono
+    wav.fmt.SampleRate = SAMPLE_RATE;
+    wav.fmt.BitsPerSample = 16;
+    wav.fmt.BlockAlign = wav.fmt.NumChannels * wav.fmt.BitsPerSample / 8; // počet Bytů na vzorek ze všech kanálů
+    wav.fmt.ByteRate = SAMPLE_RATE * wav.fmt.BlockAlign; // počet B za s
+
+    // data
+    wav.data.SubChung2ID[0] = 'd';
+    wav.data.SubChung2ID[1] = 'a';
+    wav.data.SubChung2ID[2] = 't';
+    wav.data.SubChung2ID[3] = 'a';
+    wav.data.samples = NULL;
+
+    len = CreateSpellingSamples(&wav, vstup, len, t_space, SAMPLE_RATE);
+    if (!len)
+		return -1;
+
+    wav.data.SubChung2Size = len;
+    wav.RIFF.ChungSize = 36 + len;
+
+    if ((fw = fopen(file_name, "wb")) != NULL)
+	{
+		fwrite(&wav.RIFF, 12, 1, fw);
+		fwrite(&wav.fmt, 24, 1, fw);
+		fwrite(&wav.data, 8, 1, fw);
+		fwrite(wav.data.samples, len, 1, fw);
+
+		fclose(fw);
+	}
+	else
+	{
+		free(wav.data.samples);
+		printf("\nSoubor se nepodarilo vytvorit.\n\n");
+		return -1;
+	}
+
+	free(wav.data.samples);
+	return 0;
 }

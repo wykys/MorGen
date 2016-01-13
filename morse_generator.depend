@@ -1,12 +1,12 @@
 # depslib dependency file v1.0
-1451439790 source:c:\projects\morse_generator\main.c
+1452715317 source:c:\projects\morse_generator\main.c
 	<stdio.h>
 	<stdlib.h>
 	"stype.h"
 	"wav.h"
 	"morse.h"
 
-1451441335 c:\projects\morse_generator\wav.h
+1452052053 c:\projects\morse_generator\wav.h
 	"stype.h"
 
 1451309820 c:\projects\morse_generator\stype.h
@@ -20,8 +20,25 @@
 	<stdio.h>
 	"morse.h"
 
-1451439704 source:c:\projects\morse_generator\wav.c
+1452295575 source:c:\projects\morse_generator\wav.c
 	<stdio.h>
 	"wav.h"
 	"morse.h"
+	"spelling_table.h"
+	"spelling.h"
+
+1452052567 source:c:\projects\morse_generator\spelling_table.c
+	"spelling_table.h"
+
+1452052459 c:\projects\morse_generator\spelling_table.h
+	"stype.h"
+
+1452714295 source:c:\projects\morse_generator\spelling.c
+	<stdio.h>
+	"spelling_table.h"
+	"morse.h"
+	"wav.h"
+
+1452097239 c:\projects\morse_generator\spelling.h
+	"stype.h"
 

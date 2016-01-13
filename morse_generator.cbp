@@ -38,6 +38,14 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="morse.h" />
+		<Unit filename="spelling.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="spelling.h" />
+		<Unit filename="spelling_table.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="spelling_table.h" />
 		<Unit filename="stype.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
