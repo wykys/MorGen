@@ -30,11 +30,11 @@
 
 #define BSWAP 1
 #if BSWAP == 1
-	#define BSWAP16(n)	__builtin_bswap16((n))
-	#define BSWAP32(n)	__builtin_bswap32((n))
+    #define BSWAP16(n)  __builtin_bswap16((n))
+    #define BSWAP32(n)  __builtin_bswap32((n))
 #else
-	#define BSWAP16(n)	( ((n) >> 8 & 0x00FF) | ((n) << 8 & 0xFF00) )
-	#define BSWAP32(n)	( ((n) >> 24 & 0x000000FF) | ((n) >> 8 & 0x0000FF00) | ((n) << 8 & 0x00FF0000) | ((n) << 24 & 0xFF000000))
+    #define BSWAP16(n)  ( ((n) >> 8 & 0x00FF) | ((n) << 8 & 0xFF00) )
+    #define BSWAP32(n)  ( ((n) >> 24 & 0x000000FF) | ((n) >> 8 & 0x0000FF00) | ((n) << 8 & 0x00FF0000) | ((n) << 24 & 0xFF000000))
 #endif // BSWAP
 
 #define SAMPLE_RATE 8000
@@ -43,35 +43,35 @@
 
 typedef struct
 {
-	uint8_t	 ChungID[4];
-	uint32_t ChungSize;
-	uint8_t	 Format[4];
+    uint8_t  ChungID[4];
+    uint32_t ChungSize;
+    uint8_t  Format[4];
 } riff_t;
 
 typedef struct
 {
-	uint8_t  SubChung1ID[4];
-	uint32_t SubChung1Size;
-	uint16_t AudioFormat;
-	uint16_t NumChannels;
-	uint32_t SampleRate;
-	uint32_t ByteRate;
-	uint16_t BlockAlign;
-	uint16_t BitsPerSample;
+    uint8_t  SubChung1ID[4];
+    uint32_t SubChung1Size;
+    uint16_t AudioFormat;
+    uint16_t NumChannels;
+    uint32_t SampleRate;
+    uint32_t ByteRate;
+    uint16_t BlockAlign;
+    uint16_t BitsPerSample;
 } fmt_t;
 
 typedef struct
 {
-	uint8_t  SubChung2ID[4];
-	uint32_t SubChung2Size;
-	int16_t *samples;
+    uint8_t  SubChung2ID[4];
+    uint32_t SubChung2Size;
+    int16_t *samples;
 } data_t;
 
 typedef struct
 {
-	riff_t	RIFF;
-	fmt_t	fmt;
-	data_t	data;
+    riff_t  RIFF;
+    fmt_t   fmt;
+    data_t  data;
 } wav_t;
 
 int8_t CreateMorseWav(int8_t *file_name, int8_t *vstup, uint32_t len, double t_space, double t_chars, uint16_t ToneF);
